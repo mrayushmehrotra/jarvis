@@ -13,13 +13,6 @@ from email.message import EmailMessage
 import smtplib
 from decouple import config
 
-def open_camera():
-    try:
-        sp.run('xdg-open camera:', shell=True)
-    except Exception as e:
-        print(f"Error: {e}")
-
-open_camera()
 def open_terminal():
     try:
         sp.Popen(['gnome-terminal'])  
@@ -30,6 +23,25 @@ open_terminal()
 USERNAME = config("USER")
 BOTNAME = config("BOTNAME")
 
+def find_my_ip():
+    ip_address = requests.get("https://api64.ipify.org?format=json").json()
+    return ip_address["ip"]
+
+def search_on_wikipedia():
+    result = wikipedia.summary(query,sentences=2)
+    return result
+
+def play_on_yt():
+    kit.playonyt(video)
+
+
+def search_on_google(query):
+    kit.search(query)
+
+def send_whatsapp_message(number,message):
+    kit.sendwhatmsg_instantly(f"+91{number}",message)
+
+send_whatsapp_message(9118384760,"Python Bot")
 # espeak for Linux
 engine = pyttsx3.init('espeak')
 
